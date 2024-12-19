@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
     <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
       rel="stylesheet"
     />
@@ -34,9 +38,10 @@
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
             type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            id="cart-icon"
+            class="cart-button text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            Get started
+            <i class="fa-solid fa-cart-shopping fa-2x"></i>
           </button>
           <button
             data-collapse-toggle="navbar-sticky"
@@ -104,31 +109,6 @@
       </div>
     </nav>
 
-    <!-- phan dropdown menu  -->
-    <button
-      id="dropdownDefaultButton"
-      data-dropdown-toggle="dropdown"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      type="button"
-    >
-      Dropdown button
-      <svg
-        class="w-2.5 h-2.5 ms-3"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 10 6"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="m1 1 4 4 4-4"
-        />
-      </svg>
-    </button>
-
     <!-- Dropdown menu -->
     <form class="max-w-sm mx-auto mt-24">
       <label
@@ -151,6 +131,34 @@
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-16"
       id="products"
     ></div>
+
+    <!-- Modal Giỏ Hàng -->
+    <div
+      id="cart-modal"
+      class="modal hidden fixed inset-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center"
+    >
+      <div
+        class="modal-content bg-white p-5 rounded-lg w-[90%] max-w-[600px] text-center relative"
+      >
+        <span
+          id="close-modal"
+          class="cursor-pointer absolute top-2.5 right-5 text-xl text-gray-400 hover:text-gray-600"
+          >&times;</span
+        >
+        <h2 class="text-2xl font-semibold mb-8">Giỏ Hàng</h2>
+        <div id="cart-items" class="flex-col gap-4"></div>
+        <div class="flex justify-between mt-4">
+          <div class="font-semibold text-lg">TỔNG CỘNG:</div>
+          <div id="total-price" class="font-semibold text-lg"></div>
+        </div>
+        <button
+          id="checkout"
+          class="checkout-button text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-8"
+        >
+          Thanh Toán
+        </button>
+      </div>
+    </div>
 
     <!-- flowbite  -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
