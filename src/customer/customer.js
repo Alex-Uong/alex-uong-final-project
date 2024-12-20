@@ -1,5 +1,4 @@
 import api from "./../api/api.js";
-import Product from "./../api/productApi.js";
 import Cartitem from "./cartitem.js";
 import Cart from "./cart.js";
 
@@ -75,7 +74,7 @@ const getListProduct = () => {
 
 getListProduct();
 
-// xu ly khi khach hang chon loai
+// xu ly khi khach hang chon loai san pham
 getEleId("phone-type").onchange = () => {
   const value = getEleId("phone-type").value;
   const promise = api.fetchData();
@@ -83,10 +82,16 @@ getEleId("phone-type").onchange = () => {
   promise
     .then((result) => {
       const data = result.data;
-      const filterData = data.filter(
-        (product) => product.type.toLowerCase() === value
-      );
-      renderListProduct(filterData);
+
+      // Neu la tieu de thi hien thi het
+      if (value === "all") {
+        renderListProduct(data);
+      } else {
+        const filterData = data.filter(
+          (product) => product.type.toLowerCase() === value
+        );
+        renderListProduct(filterData);
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -121,6 +126,7 @@ const modelContent = getEleId("model-content");
 cartIcon.addEventListener("click", () => {
   cartModal.classList.remove("hidden");
   getLocalStorage();
+  renderTotal();
 });
 
 // Dong model khi click vao dau x
@@ -169,14 +175,15 @@ const renderCart = (data) => {
             <div class="w-[60%] flex flex-col items-start gap-4">
               <h4 class="font-semibold">${item.name}</h4>
               <div>
-                <button class="minus w-[4ch]">-</button>
+                <button class="minus w-[4ch]" data-id="${item.id}">-</button>
                 <input type="text" class="quantity w-[4ch]" value="${item.quantity}" />
-                <button class="plus w-[4ch]">+</button>
+                <button class="plus w-[4ch]" data-id="${item.id}">+</button>
               </div>
             </div>
             <div class="w-[20%] flex flex-col gap-4">
               <i
                 class="fa-solid fa-trash text-lg cursor-pointer hover:text-red-600 transition-all duration-300 delete"
+                data-id="${item.id}"
               ></i>
               <h4 class="font-semibold">$${item.price}</h4>
             </div>
@@ -188,10 +195,43 @@ const renderCart = (data) => {
 
   // Them su kien click khi render xong
   // Nut -
+  document.querySelectorAll(".minus").forEach((minusIcon) => {
+    minusIcon.addEventListener("click", () => {
+      const id = minusIcon.dataset.id;
+      cart.decreaseQuantity(id);
+      setLocalStorage();
+      renderCart(cart.array);
+      renderTotal();
+    });
+  });
 
   // Nut +
+  document.querySelectorAll(".plus").forEach((plusIcon) => {
+    plusIcon.addEventListener("click", () => {
+      const id = plusIcon.dataset.id;
+      cart.increaseQuantity(id);
+      setLocalStorage();
+      renderCart(cart.array);
+      renderTotal();
+    });
+  });
 
   // Nut xoa
+  document.querySelectorAll(".delete").forEach((trashIcon) => {
+    trashIcon.addEventListener("click", () => {
+      const id = trashIcon.dataset.id;
+      cart.removeProduct(id);
+      setLocalStorage();
+      renderCart(cart.array);
+      renderTotal();
+    });
+  });
+};
+
+// Render tong tien
+const renderTotal = () => {
+  const total = cart.getTotal();
+  getEleId("total-price").innerHTML = `$${total}`;
 };
 
 /**
@@ -217,3 +257,10 @@ const getLocalStorage = () => {
 window.onload = () => {
   getLocalStorage();
 };
+
+// Xu ly nut thanh toan
+getEleId("checkout").addEventListener("click", () => {
+  cart.clearCart();
+  setLocalStorage();
+  cartModal.classList.add("hidden");
+});
