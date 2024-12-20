@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:customer": "npx tailwindcss -i ./src/customer/customer-input.css -o ./asset/css/customer-output.css --watch",
-    "build:admin": "npx tailwindcss -i ./src/admin/admin-input.css -o ./asset/css/admin-output.css --watch"
+    "build:admin": "npx tailwindcss -i ./src/admin/views/admin-input.css -o ./asset/css/admin-output.css --watch"
   },
   "keywords": [],
   "author": "",
