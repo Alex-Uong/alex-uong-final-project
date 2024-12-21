@@ -1,4 +1,4 @@
-import api from "./../api/api.js";
+import api from "./../admin/services/api.js";
 import Cartitem from "./cartitem.js";
 import Cart from "./cart.js";
 
