@@ -8,7 +8,11 @@ I didn't know that we have to submit the final project before 2025 so I have to 
 
 This project is a phone selling website that display phones and users can choose which phones to buy.
 
-I used html, tailwind, css, javaScript... to do this project.
+We didn't finish the whole website due to the lack of time (it's the end of 2024 and I work full-time) so I just finished some demo as follow.
+
+The homepage has 2 a tag to link to 2 pages: customer page where users can interact and buy products and admin page wherre users can manage products.
+
+We use some basic tailwind and flowbite to style the website and javaScript to do Validation, event handling, add products, edit, delete, add to cart, check out, and so on.
 
 What you can see on customer page:
 
