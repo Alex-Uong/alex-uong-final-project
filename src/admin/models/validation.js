@@ -1,86 +1,86 @@
 export default class Validation {
-  // Kiểm tra tên điện thoại
+  // Check phone name
   checkPhoneName(name, existingProducts = []) {
     if (!name.trim()) {
-      return "Tên điện thoại không được để trống!";
+      return "phone name cannot be empty!";
     }
     if (name.length < 3) {
-      return "Tên điện thoại phải có ít nhất 3 ký tự!";
+      return "phone name must be at least 3 characters long!";
     }
     const isDuplicate = existingProducts.some(
       (product) => product.name.toLowerCase() === name.trim().toLowerCase()
     );
     if (isDuplicate) {
-      return "Tên sản phẩm này đã tồn tại!";
+      return "phone name already exists!";
     }
     return "";
   }
 
-  // Kiểm tra giá
+  // Check price
   checkPrice(price) {
     if (!price.trim()) {
-      return "Vui lòng nhập giá!";
+      return "please enter price!";
     }
     if (isNaN(price)) {
-      return "Giá phải là số!";
+      return "price has to be number!";
     }
     if (price <= 0) {
-      return "Vui lòng nhập số dương cho giá!";
+      return "price has to be greater than 0!";
     }
     return "";
   }
 
-  // Kiểm tra màn hình
+  // Check screen
   checkScreen(screen) {
     if (!screen.trim()) {
-      return "Thông số màn hình không được để trống!";
+      return "screen specification cannot be empty!";
     }
     return "";
   }
 
-  // Kiểm tra camera sau
+  // Check back camera
   checkBackCamera(backCamera) {
     if (!backCamera.trim()) {
-      return "Thông số camera sau không được để trống!";
+      return "back camera specification cannot be empty!";
     }
     return "";
   }
 
-  // Kiểm tra camera trước
+  // Check front camera
   checkFrontCamera(frontCamera) {
     if (!frontCamera.trim()) {
-      return "Thông số camera trước không được để trống!";
+      return "front camera specification cannot be empty!";
     }
     return "";
   }
 
-  // Kiểm tra link hình ảnh
+  // Check image link
   checkImageLink(img) {
     if (!img.trim()) {
-      return "Vui lòng nhập link hình ảnh!";
+      return "please enter image link!";
     }
     const regex = /^(http|https):\/\/[^ "]+$/;
     if (!regex.test(img)) {
-      return "Link hình ảnh không hợp lệ!";
+      return "invalid image link!";
     }
     return "";
   }
 
-  // Kiểm tra mô tả
+  // Check description
   checkDescription(desc) {
     if (!desc.trim()) {
-      return "Mô tả không được để trống!";
+      return "description cannot be empty!";
     }
     if (desc.length < 10) {
-      return "Mô tả phải có ít nhất 10 ký tự!";
+      return "description must be at least 10 characters long!";
     }
     return "";
   }
 
-  // Kiểm tra thương hiệu
+  // Check brand
   checkBrand(type) {
     if (!type || type.trim() === "") {
-      return "Vui lòng chọn thương hiệu!";
+      return "please select a brand!";
     }
     return "";
   }

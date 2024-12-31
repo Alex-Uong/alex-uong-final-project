@@ -58,7 +58,7 @@ class Cart {
 
       // Kiem tra so luong co ve 0 chua
       if (this.array[index].quantity <= 0) {
-        const isConfirmed = confirm("Bạn có muốn xóa sản phẩm này không?");
+        const isConfirmed = confirm("do you want to delete this product?");
         if (isConfirmed) {
           this.array.splice(index, 1);
         } else {
